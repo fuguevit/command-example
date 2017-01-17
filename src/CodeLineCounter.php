@@ -16,12 +16,12 @@ class CodeLineCounter extends Command
             ->addOption('suffix', null, InputOption::VALUE_REQUIRED, 'Specify file suffix.')
             ->addOption('exclude', null, InputOption::VALUE_REQUIRED, 'Specify exclude directory.');
     }
-    
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $fileFoundCommand = "find . -type f -execdir cat {} \;";
-        $wordCountCommand = "wc -l";
-        
+        $wordCountCommand = 'wc -l';
+
         // Add -name for find.
         if ($suffix = $input->getOption('suffix')) {
             $nameOption = "-name '*.$suffix'";
@@ -36,7 +36,7 @@ class CodeLineCounter extends Command
 
         $command = $fileFoundCommand.' | '.$wordCountCommand;
         $result = exec($command);
-        
+
         $output->writeln($result);
     }
 
